@@ -6,6 +6,14 @@ class HealtyFoodView extends StatefulWidget {
 }
 
 class _HealtyFoodViewState extends State<HealtyFoodView> {
+  List<String> categories = [
+    "Breakfast",
+    "Launch",
+    "Launch",
+    "Launch",
+    "Launch"
+  ];
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +52,36 @@ class _HealtyFoodViewState extends State<HealtyFoodView> {
       children: [
         b1(),
         cards,
+        categoryTitle(),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            itemCount: categories.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => SizedBox(
+              width: 100,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    child: Icon(Icons.accessible_forward),
+                  ),
+                  Text(categories[index]),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  Text categoryTitle() {
+    return Text(
+      "Categories",
+      style: Theme.of(context).textTheme.headline6,
     );
   }
 
@@ -101,22 +138,35 @@ class _HealtyFoodViewState extends State<HealtyFoodView> {
       children: [
         RaisedButton(
           shape: StadiumBorder(),
-          onPressed: () {},
+          color: buildCategoryButtonColor(0),
+          onPressed: () => setColorIndex(0),
           child: Text("hello"),
         ),
         RaisedButton(
           shape: StadiumBorder(),
-          onPressed: () {},
+          color: buildCategoryButtonColor(1),
+          onPressed: () => setColorIndex(1),
           child: Text("hello"),
         ),
         RaisedButton(
           shape: StadiumBorder(),
-          onPressed: () {},
+          color: buildCategoryButtonColor(2),
+          onPressed: () => setColorIndex(2),
           child: Text("hello"),
         ),
       ],
     );
   }
+
+  void setColorIndex(int index) {
+    setState(() {
+      count = index;
+    });
+  }
+
+  Color buildCategoryButtonColor(int index) => count == index
+      ? Theme.of(context).colorScheme.onError
+      : Theme.of(context).colorScheme.primary;
 
   BottomNavigationBar bars() {
     return BottomNavigationBar(items: [
