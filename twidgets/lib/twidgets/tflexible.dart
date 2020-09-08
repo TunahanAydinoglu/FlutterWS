@@ -29,7 +29,7 @@ class TFlexible extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            Flexible(fit: FlexFit.tight, flex: 1, child: SizedBox()),
+            Flexible(fit: FlexFit.tight, flex: 10, child: SizedBox()),
             Flexible(
               fit: FlexFit.tight,
               flex: 5,

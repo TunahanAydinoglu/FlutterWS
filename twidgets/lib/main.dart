@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:twidgets/twidgets/tflexible.dart';
+// import 'package:twidgets/twidgets/tflexible.dart';
+import 'package:twidgets/twidgets/ttransform.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TFlexible(),
+      home: TTransform(),
     );
   }
 }
