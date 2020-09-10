@@ -13,7 +13,6 @@ class _HttpHelloViewState extends State<HttpHelloView> {
   // String data;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // isHaveData = true;
     // data = "";
