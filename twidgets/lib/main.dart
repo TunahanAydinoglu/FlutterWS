@@ -3,6 +3,7 @@ import 'package:twidgets/twidgets/texpanded.dart';
 import 'package:twidgets/twidgets/tflexible.dart';
 // import 'package:twidgets/twidgets/tflexible.dart';
 import 'package:twidgets/twidgets/ttransform.dart';
+import 'package:twidgets/twidgets/tflex.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TExpanded(),
+      home: TFlex(),
     );
   }
 }
