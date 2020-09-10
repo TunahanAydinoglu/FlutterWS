@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:twidgets/twidgets/texpanded.dart';
-import 'package:twidgets/twidgets/tflexible.dart';
+// import 'package:twidgets/twidgets/texpanded.dart';
 // import 'package:twidgets/twidgets/tflexible.dart';
-import 'package:twidgets/twidgets/ttransform.dart';
-import 'package:twidgets/twidgets/tflex.dart';
-import 'package:twidgets/twidgets/usegradient.dart';
+// import 'package:twidgets/twidgets/tflexible.dart';
+// import 'package:twidgets/twidgets/ttransform.dart';
+// import 'package:twidgets/twidgets/tflex.dart';
+// import 'package:twidgets/twidgets/usegradient.dart';
+import 'package:twidgets/views/httphello.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: UseGradient(),
+      home: HttpHelloView(),
     );
   }
 }
