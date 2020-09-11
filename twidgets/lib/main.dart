@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twidgets/views/form_view.dart';
 // import 'package:twidgets/twidgets/texpanded.dart';
 // import 'package:twidgets/twidgets/tflexible.dart';
 // import 'package:twidgets/twidgets/tflexible.dart';
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: JsonPlaceHolderView(),
+      routes: {
+        "/": (context) => FormView(),
+        "/home": (context) => JsonPlaceHolderView(),
+      },
     );
   }
 }
