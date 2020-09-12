@@ -8,11 +8,12 @@ class SurveyPage extends StatefulWidget {
 }
 
 class _SurveyPageState extends State<SurveyPage> {
-  bool answer1 = false;
-  bool answer2 = false;
-  bool answer3 = false;
-  bool answer4 = true;
-  bool answer5 = false;
+  @override
+  void initState() {
+    super.initState();
+    ItemService.getAll();
+  }
+
   @override
   Widget build(BuildContext context) {
     var mySize = MediaQuery.of(context).size;
@@ -40,44 +41,50 @@ class _SurveyPageState extends State<SurveyPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  answerBox(answer1, "Store locator"),
-                  answerBox(answer2, "AR fitting room"),
-                  answerBox(answer3, "Favourites tab"),
-                  answerBox(answer4, "Support chat"),
-                  answerBox(answer5, "Re-order the basket"),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: ItemService.items.length,
+                    itemBuilder: (context, index) {
+                      return answerBox(ItemService.items[index]);
+                    },
+                  ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: mySize.width * 0.75,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      gradient:
-                          LinearGradient(colors: [Colors.green, Colors.yellow]),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "SUBMIT",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              submitButton(mySize),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding submitButton(Size mySize) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          width: mySize.width * 0.75,
+          height: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            gradient: LinearGradient(colors: [Colors.green, Colors.yellow]),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "SUBMIT",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
               ),
             ],
           ),
@@ -86,7 +93,7 @@ class _SurveyPageState extends State<SurveyPage> {
     );
   }
 
-  Padding answerBox(bool answer, String text) {
+  Padding answerBox(ListItem item) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -97,23 +104,23 @@ class _SurveyPageState extends State<SurveyPage> {
         child: Row(
           children: [
             // Checkbox(
-            //     value: answer,
+            //     value: item.answer,
             //     activeColor: Colors.green,
             //     onChanged: (bool newAnswer) {
             //       setState(() {
-            //         answer = newAnswer;
+            //         item.answer = newAnswer;
             //       });
             //     }),
             CircularCheckBox(
-                value: answer,
+                value: item.answer,
                 activeColor: Colors.green,
                 materialTapTargetSize: MaterialTapTargetSize.padded,
                 onChanged: (bool x) {
                   setState(() {
-                    answer = !answer;
+                    item.answer = !item.answer;
                   });
                 }),
-            Text(text),
+            Text(item.text),
           ],
         ),
       ),
@@ -163,5 +170,25 @@ class _SurveyPageState extends State<SurveyPage> {
         )
       ],
     );
+  }
+}
+
+class ListItem {
+  int id;
+  bool answer;
+  String text;
+  ListItem(this.id, this.answer, this.text);
+}
+
+class ItemService {
+  static List<ListItem> items = new List<ListItem>();
+
+  static List<ListItem> getAll() {
+    items.add(new ListItem(1, false, "Store locator"));
+    items.add(new ListItem(2, false, "AR fitting room"));
+    items.add(new ListItem(3, false, "Favourites tab"));
+    items.add(new ListItem(4, false, "Support chat"));
+    items.add(new ListItem(5, false, "Re-order the basket"));
+    return items;
   }
 }
