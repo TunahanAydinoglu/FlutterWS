@@ -1,6 +1,7 @@
 import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:survey/pages/surveydetail.dart';
 
 class SurveyPage extends StatefulWidget {
   @override
@@ -135,9 +136,19 @@ class _SurveyPageState extends State<SurveyPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Icon(
-                FontAwesomeIcons.times,
-                color: Colors.green,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SurveyDetailPage(),
+                    ),
+                  );
+                },
+                child: Icon(
+                  FontAwesomeIcons.times,
+                  color: Colors.green,
+                ),
               ),
             ),
           ],
