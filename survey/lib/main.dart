@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey/pages/dashboard.dart';
+// import 'package:survey/pages/dashboard.dart';
+import 'package:survey/pages/mysurveydetail.dart';
 // import 'package:survey/pages/eventspage.dart';
 // import 'package:survey/pages/surveypage.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DashboardPage(),
+      home: MySurveyDetail(),
     );
   }
 }
