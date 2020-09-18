@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:survey/pages/surveypage.dart';
+import 'package:survey/screens/surveypage.dart';
 
 class SurveyDetailPage extends StatefulWidget {
   @override

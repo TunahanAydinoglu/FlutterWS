@@ -12,7 +12,9 @@ class _SurveyPageState extends State<SurveyPage> {
   @override
   void initState() {
     super.initState();
-    ItemService.getAll();
+    if (ItemService.items.length == 0) {
+      ItemService.getAll();
+    }
   }
 
   @override
@@ -22,7 +24,7 @@ class _SurveyPageState extends State<SurveyPage> {
       body: Center(
         child: Container(
           width: mySize.width * 0.8,
-          height: mySize.height * 0.8,
+          height: mySize.height * 0.82,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Color(0xfff1f3f8),
@@ -36,21 +38,16 @@ class _SurveyPageState extends State<SurveyPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  topTexts(mySize),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: ItemService.items.length,
-                    itemBuilder: (context, index) {
-                      return answerBox(ItemService.items[index]);
-                    },
-                  ),
-                ],
+              topTexts(mySize),
+              SizedBox(
+                height: 20,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: ItemService.items.length,
+                itemBuilder: (context, index) {
+                  return answerBox(ItemService.items[index]);
+                },
               ),
               submitButton(mySize),
             ],
