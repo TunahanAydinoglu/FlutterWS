@@ -80,12 +80,12 @@ class _DashboardState extends State<Dashboard> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Card(
-                      margin: EdgeInsets.only(bottom: 8, right: 10, left: 10),
+                      margin: EdgeInsets.only(bottom: 12, right: 10, left: 10),
                       shadowColor: Colors.black,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13),
                       ),
-                      elevation: 15,
+                      elevation: 9,
                       child: ListTile(
                         onTap: () {
                           setState(() {
