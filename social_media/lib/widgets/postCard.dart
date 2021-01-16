@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
+  final String profileImageUrl;
+  final String name;
+  final String surname;
+  final String timer;
+  final String postImageUrl;
+  final String description;
+
+  const PostCard(
+      {Key key,
+      this.profileImageUrl,
+      this.name,
+      this.surname,
+      this.timer,
+      this.postImageUrl,
+      this.description})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,8 +46,7 @@ class PostCard extends StatelessWidget {
                         color: Colors.indigo,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                              "https://cdn.pixabay.com/photo/2019/09/05/23/07/portrait-4455187_960_720.jpg"),
+                          image: NetworkImage(profileImageUrl),
                         )),
                   ),
                   SizedBox(
@@ -41,7 +57,7 @@ class PostCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Name Surname",
+                          name + " " + surname,
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -49,7 +65,7 @@ class PostCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "1 hour ago",
+                          timer,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -65,23 +81,27 @@ class PostCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Image Description",
+                  description,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey),
                 ),
               ),
-              Image.network(
-                "https://cdn.pixabay.com/photo/2019/09/05/23/07/portrait-4455187_960_720.jpg",
-                width: double.infinity,
-                height: 210,
-                fit: BoxFit.cover,
+              InkWell(
+                onDoubleTap: () => {print("Liked with double tab")},
+                child: Image.network(
+                  postImageUrl,
+                  width: double.infinity,
+                  height: 210,
+                  fit: BoxFit.cover,
+                ),
               ),
               SizedBox(
                 height: 4,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   PostButton(
                     icon: Icons.favorite,
@@ -90,18 +110,34 @@ class PostCard extends StatelessWidget {
                       print("Liked");
                     },
                   ),
-                  PostButton(
-                      icon: Icons.comment,
-                      text: "Comments",
-                      function: () {
-                        print("Comments");
-                      }),
-                  PostButton(
-                      icon: Icons.share,
-                      text: "Share",
-                      function: () {
-                        print("Shared");
-                      }),
+                  FlatButton.icon(
+                    onPressed: () {
+                      print("Comments");
+                    },
+                    icon: Icon(
+                      Icons.comment,
+                      color: Colors.grey,
+                    ),
+                    label: Text(
+                      "Comments",
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  FlatButton.icon(
+                    onPressed: () {
+                      print("shared");
+                    },
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.grey,
+                    ),
+                    label: Text(
+                      "Share",
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -122,6 +158,7 @@ class PostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.white,
       child: InkWell(
         onTap: function,
         child: Container(
