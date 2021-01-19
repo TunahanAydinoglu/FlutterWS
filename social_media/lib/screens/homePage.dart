@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media/screens/profilePage.dart';
 import 'package:social_media/widgets/postCard.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,7 +25,30 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.notifications),
             color: Colors.grey,
             iconSize: 32.0,
-            onPressed: () => {},
+            onPressed: () => {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Miley followed you.",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Text("3 minutes later")
+                          ],
+                        ),
+                      )
+                    ],
+                  );
+                },
+              )
+            },
           ),
         ],
       ),
@@ -92,6 +116,14 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.purple[300],
+        onPressed: null,
+        child: Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
@@ -115,57 +147,74 @@ class StoryBoard extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          profileCard(user1.name, user1.image),
-          profileCard(user2.name, user2.image),
-          profileCard(user3.name, user3.image),
-          profileCard(user4.name, user4.image),
-          profileCard(user5.name, user5.image),
-          profileCard(user6.name, user6.image),
-          profileCard(user7.name, user7.image),
+          profileCard(user1, context),
+          profileCard(user2, context),
+          profileCard(user3, context),
+          profileCard(user4, context),
+          profileCard(user5, context),
+          profileCard(user6, context),
+          profileCard(user7, context),
         ],
       ),
     );
   }
 }
 
-Widget profileCard(String userName, String profileImageUrl) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0, right: 8),
-    child: Column(
-      children: [
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(width: 2.0, color: Colors.grey),
-                borderRadius: BorderRadius.circular(35),
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(profileImageUrl)),
-              ),
+Widget profileCard(User user, BuildContext context) {
+  return Material(
+    child: InkWell(
+      onTap: () async {
+        bool backData = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) => ProfilePage(
+              user: user,
             ),
-            Container(
-              width: 20,
-              height: 20,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(width: 2, color: Colors.white),
-              ),
+          ),
+        );
+        print(backData);
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, right: 8),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Hero(
+                  tag: user.image,
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(width: 2.0, color: Colors.grey),
+                      borderRadius: BorderRadius.circular(35),
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: NetworkImage(user.image)),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(width: 2, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              user.name,
+              style: TextStyle(fontSize: 15.0, color: Colors.black),
             ),
           ],
         ),
-        SizedBox(
-          height: 4,
-        ),
-        Text(
-          userName,
-          style: TextStyle(fontSize: 15.0, color: Colors.black),
-        ),
-      ],
+      ),
     ),
   );
 }
